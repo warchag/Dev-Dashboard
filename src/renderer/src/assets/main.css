@@ -19,22 +19,22 @@
   --sidebar-width: 260px;
 }
 
-:root[data-theme="purple"] {
+:root[data-theme='purple'] {
   --theme-accent: #a855f7;
   --theme-accent-rgb: 168, 85, 247;
 }
 
-:root[data-theme="neon-green"] {
+:root[data-theme='neon-green'] {
   --theme-accent: #10b981;
   --theme-accent-rgb: 16, 185, 129;
 }
 
-:root[data-theme="orange"] {
+:root[data-theme='orange'] {
   --theme-accent: #f59e0b;
   --theme-accent-rgb: 245, 158, 11;
 }
 
-:root[data-theme="pink"] {
+:root[data-theme='pink'] {
   --theme-accent: #ec4899;
   --theme-accent-rgb: 236, 72, 153;
 }

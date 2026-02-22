@@ -6,8 +6,8 @@ import icon from '../../resources/icon.png?asset'
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 1024,
+    height: 710,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -67,7 +67,7 @@ app.whenReady().then(() => {
       const networkInterfaces = await si.networkInterfaces()
       const time = si.time()
       const cpuTemperature = await si.cpuTemperature()
-      
+
       return { cpu, mem, osInfo, disk, networkStats, networkInterfaces, time, cpuTemperature }
     } catch (e) {
       console.error(e)
@@ -83,7 +83,7 @@ app.whenReady().then(() => {
       const top5 = procs.list
         .sort((a, b) => b.cpu - a.cpu)
         .slice(0, 5)
-        .map(p => ({
+        .map((p) => ({
           pid: p.pid,
           name: p.name,
           cpu: p.cpu,
@@ -139,38 +139,40 @@ app.whenReady().then(() => {
       const isWin = process.platform === 'win32'
       const cmd = isWin ? 'ping' : 'ping'
       const args = isWin ? ['-n', '4', host] : ['-c', '4', host]
-      
+
       const ping = require('child_process').spawn(cmd, args)
       let output = ''
-      
+
       ping.stdout.on('data', (data) => {
         output += data.toString()
       })
-      
+
       ping.stderr.on('data', (data) => {
         output += data.toString()
       })
-      
+
       ping.on('close', (code) => {
         let metrics: any = undefined
         const success = code === 0
-        
+
         // Simple regex parsing for avg latency and loss
         try {
           if (isWin) {
             const lossMatch = output.match(/\((\d+)% loss/i)
             const avgMatch = output.match(/Average = (\d+)ms/i)
             metrics = {
-              loss: lossMatch ? parseInt(lossMatch[1]) : (success ? 0 : 100),
+              loss: lossMatch ? parseInt(lossMatch[1]) : success ? 0 : 100,
               avg: avgMatch ? parseInt(avgMatch[1]) : 0,
               min: 0,
               max: 0
             }
           } else {
             const lossMatch = output.match(/(\d+(?:\.\d+)?)% packet loss/i)
-            const statsMatch = output.match(/min\/avg\/max\/(?:mdev|stddev) = ([\d.]+)\/([\d.]+)\/([\d.]+)/i)
+            const statsMatch = output.match(
+              /min\/avg\/max\/(?:mdev|stddev) = ([\d.]+)\/([\d.]+)\/([\d.]+)/i
+            )
             metrics = {
-              loss: lossMatch ? parseFloat(lossMatch[1]) : (success ? 0 : 100),
+              loss: lossMatch ? parseFloat(lossMatch[1]) : success ? 0 : 100,
               min: statsMatch ? parseFloat(statsMatch[1]) : 0,
               avg: statsMatch ? parseFloat(statsMatch[2]) : 0,
               max: statsMatch ? parseFloat(statsMatch[3]) : 0
@@ -179,7 +181,7 @@ app.whenReady().then(() => {
         } catch (_e) {
           // Ignore parsing errors
         }
-        
+
         resolve({ success, output, metrics })
       })
     })
