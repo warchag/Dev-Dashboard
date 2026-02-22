@@ -6,6 +6,7 @@ import DockerManager from './components/DockerManager'
 import LogViewer from './components/LogViewer'
 import Settings from './components/Settings'
 import MiniTools from './components/MiniTools'
+import NetworkManager from './components/NetworkManager'
 
 function App() {
   const [activeTab, setActiveTab] = useState('overview')
@@ -49,6 +50,12 @@ function App() {
             onClick={() => setActiveTab('minitools')}
           >
             🛠️ Mini Tools
+          </a>
+          <a
+            className={activeTab === 'network' ? 'nav-item active' : 'nav-item'}
+            onClick={() => setActiveTab('network')}
+          >
+            🌐 Network
           </a>
           <div style={{ flex: 1 }} />
           <a
@@ -94,6 +101,11 @@ function App() {
         {activeTab === 'minitools' && (
           <div className="animate-fade-in" style={{ display: 'flex', height: '100%', flexDirection: 'column', gap: '24px' }}>
             <MiniTools />
+          </div>
+        )}
+        {activeTab === 'network' && (
+          <div className="animate-fade-in" style={{ display: 'flex', height: '100%', flexDirection: 'column', gap: '24px' }}>
+            <NetworkManager />
           </div>
         )}
         {activeTab === 'settings' && (

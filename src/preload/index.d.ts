@@ -14,7 +14,8 @@ declare global {
       },
       network: {
         getPorts: () => Promise<string>,
-        getExtIp: () => Promise<string>
+        getExtIp: () => Promise<string>,
+        ping: (host: string) => Promise<{ success: boolean; output: string; metrics?: { min: number; avg: number; max: number; loss: number } }>
       },
       process: {
         kill: (pid: number | string) => Promise<boolean>

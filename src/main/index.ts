@@ -111,6 +111,57 @@ app.whenReady().then(() => {
     }
   })
 
+  ipcMain.handle('network:ping', async (_, host: string) => {
+    return new Promise((resolve) => {
+      const isWin = process.platform === 'win32'
+      const cmd = isWin ? 'ping' : 'ping'
+      const args = isWin ? ['-n', '4', host] : ['-c', '4', host]
+      
+      const ping = require('child_process').spawn(cmd, args)
+      let output = ''
+      
+      ping.stdout.on('data', (data) => {
+        output += data.toString()
+      })
+      
+      ping.stderr.on('data', (data) => {
+        output += data.toString()
+      })
+      
+      ping.on('close', (code) => {
+        let metrics: any = undefined
+        const success = code === 0
+        
+        // Simple regex parsing for avg latency and loss
+        try {
+          if (isWin) {
+            const lossMatch = output.match(/\((\d+)% loss/i)
+            const avgMatch = output.match(/Average = (\d+)ms/i)
+            metrics = {
+              loss: lossMatch ? parseInt(lossMatch[1]) : (success ? 0 : 100),
+              avg: avgMatch ? parseInt(avgMatch[1]) : 0,
+              min: 0,
+              max: 0
+            }
+          } else {
+            const lossMatch = output.match(/(\d+(?:\.\d+)?)% packet loss/i)
+            const statsMatch = output.match(/min\/avg\/max\/(?:mdev|stddev) = ([\d.]+)\/([\d.]+)\/([\d.]+)/i)
+            metrics = {
+              loss: lossMatch ? parseFloat(lossMatch[1]) : (success ? 0 : 100),
+              min: statsMatch ? parseFloat(statsMatch[1]) : 0,
+              avg: statsMatch ? parseFloat(statsMatch[2]) : 0,
+              max: statsMatch ? parseFloat(statsMatch[3]) : 0
+            }
+          }
+        } catch (_e) {
+          // Ignore parsing errors
+        }
+        
+        resolve({ success, output, metrics })
+      })
+    })
+  })
+
   ipcMain.handle('process:kill', async (_, pid: number | string) => {
     try {
       await execPromise(`kill -9 ${pid}`)

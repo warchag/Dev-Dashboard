@@ -13,7 +13,8 @@ const api = {
   },
   network: {
     getPorts: () => ipcRenderer.invoke('network:getPorts'),
-    getExtIp: () => ipcRenderer.invoke('network:getExtIp')
+    getExtIp: () => ipcRenderer.invoke('network:getExtIp'),
+    ping: (host: string) => ipcRenderer.invoke('network:ping', host)
   },
   process: {
     kill: (pid: number | string) => ipcRenderer.invoke('process:kill', pid)
