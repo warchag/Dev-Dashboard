@@ -17,6 +17,8 @@
   --theme-accent-rgb: 59, 130, 246;
   --font-family: 'Inter', system-ui, -apple-system, sans-serif;
   --sidebar-width: 260px;
+  --font-scale: 1;
+  font-size: calc(16px * var(--font-scale, 1));
 }
 
 :root[data-theme='purple'] {
@@ -83,7 +85,7 @@ body {
   padding: 8px 16px;
   border-radius: 8px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 0.875rem;
   cursor: pointer;
   transition: all 0.2s ease;
   border: none;

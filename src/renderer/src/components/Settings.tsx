@@ -1,7 +1,7 @@
-import { useTheme, ThemeColor, FontFamily } from './ThemeContext'
+import { useTheme, ThemeColor, FontFamily, FontSize } from './ThemeContext'
 
 export default function Settings() {
-  const { themeColor, setThemeColor, fontFamily, setFontFamily } = useTheme()
+  const { themeColor, setThemeColor, fontFamily, setFontFamily, fontSize, setFontSize } = useTheme()
 
   const colors: { id: ThemeColor; label: string; color: string }[] = [
     { id: 'blue', label: 'Default Blue', color: '#3b82f6' },
@@ -106,7 +106,36 @@ export default function Settings() {
                 }}
                 onClick={() => setFontFamily(f)}
               >
-                <span style={{ fontSize: '18px' }}>{f}</span>
+                <span style={{ fontSize: '1.125rem' }}>{f}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 style={{ marginBottom: '16px', color: 'var(--text-muted)' }}>Text Size</h3>
+          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            {(['small', 'medium', 'large'] as FontSize[]).map((size) => (
+              <div
+                key={size}
+                className="glass-panel"
+                style={{
+                  padding: '16px 24px',
+                  cursor: 'pointer',
+                  border:
+                    fontSize === size
+                      ? '2px solid var(--theme-accent)'
+                      : '1px solid var(--glass-border)',
+                  color: fontSize === size ? 'var(--theme-accent)' : 'var(--text-muted)',
+                  fontWeight: fontSize === size ? '600' : '400',
+                  transition: 'all 0.2s ease',
+                  textTransform: 'capitalize'
+                }}
+                onClick={() => setFontSize(size)}
+              >
+                <span style={{ fontSize: size === 'small' ? '0.85rem' : size === 'large' ? '1.15rem' : '1rem' }}>
+                  {size} Text
+                </span>
               </div>
             ))}
           </div>

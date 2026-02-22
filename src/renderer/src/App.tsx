@@ -80,7 +80,7 @@ function App() {
             paddingTop: '16px',
             borderTop: '1px solid var(--glass-border)',
             textAlign: 'center',
-            fontSize: '12px',
+            fontSize: '0.75rem',
             color: 'var(--text-muted)'
           }}
         >

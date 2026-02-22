@@ -95,14 +95,14 @@ export default function DockerManager() {
                       style={{
                         padding: '12px 8px',
                         fontFamily: 'monospace',
-                        fontSize: '13px',
+                        fontSize: '0.8125rem',
                         color: 'var(--text-muted)'
                       }}
                     >
                       {container.image}
                     </td>
                     <td style={{ padding: '12px 8px' }}>{container.state}</td>
-                    <td style={{ padding: '12px 8px', fontSize: '13px' }}>
+                    <td style={{ padding: '12px 8px', fontSize: '0.8125rem' }}>
                       {container.ports || '-'}
                     </td>
                   </tr>

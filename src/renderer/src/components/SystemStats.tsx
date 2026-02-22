@@ -174,7 +174,7 @@ export default function SystemStats() {
                 color: cpuTemperature.main > 75 ? '#000' : 'var(--text-main)',
                 padding: '2px 8px',
                 borderRadius: '12px',
-                fontSize: '12px',
+                fontSize: '0.75rem',
                 fontWeight: 'bold'
               }}
             >
@@ -363,11 +363,11 @@ export default function SystemStats() {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ color: 'var(--accent-green)', fontSize: '18px' }}>↓</span>
+              <span style={{ color: 'var(--accent-green)', fontSize: '1.125rem' }}>↓</span>
               <span>{dlSpeed} MB/s</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ color: 'var(--accent-blue)', fontSize: '18px' }}>↑</span>
+              <span style={{ color: 'var(--accent-blue)', fontSize: '1.125rem' }}>↑</span>
               <span>{ulSpeed} MB/s</span>
             </div>
           </div>

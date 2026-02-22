@@ -218,7 +218,7 @@ export default function ProcessManager() {
                     <button
                       className="btn btn-danger"
                       onClick={() => setConfirmKillPid(proc.pid)}
-                      style={{ padding: '6px 12px', fontSize: '12px' }}
+                      style={{ padding: '6px 12px', fontSize: '0.75rem' }}
                     >
                       Kill
                     </button>

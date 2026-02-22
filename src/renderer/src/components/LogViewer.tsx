@@ -78,7 +78,7 @@ export default function LogViewer() {
               alignItems: 'center',
               gap: '8px',
               cursor: 'pointer',
-              fontSize: '13px',
+              fontSize: '0.8125rem',
               color: 'var(--text-muted)'
             }}
           >
@@ -113,7 +113,8 @@ export default function LogViewer() {
           padding: '16px',
           overflowY: 'auto',
           fontFamily: 'monospace',
-          fontSize: '13px',
+          fontSize: '0.8125rem',
+          lineHeight: '1.6',
           color: '#a3be8c',
           whiteSpace: 'pre-wrap',
           border: '1px solid var(--glass-border)'

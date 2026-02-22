@@ -133,10 +133,10 @@ export default function NetworkManager() {
       {metrics && (
         <div style={{ display: 'flex', gap: '16px' }}>
           <div className="glass-panel" style={{ padding: '16px', flex: 1, textAlign: 'center' }}>
-            <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Average Latency</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Average Latency</div>
             <div
               style={{
-                fontSize: '24px',
+                fontSize: '1.5rem',
                 fontWeight: 'bold',
                 color: metrics.avg > 150 ? '#ff4757' : '#2ed573'
               }}
@@ -145,10 +145,10 @@ export default function NetworkManager() {
             </div>
           </div>
           <div className="glass-panel" style={{ padding: '16px', flex: 1, textAlign: 'center' }}>
-            <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Packet Loss</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Packet Loss</div>
             <div
               style={{
-                fontSize: '24px',
+                fontSize: '1.5rem',
                 fontWeight: 'bold',
                 color: metrics.loss > 0 ? '#ff4757' : '#2ed573'
               }}
@@ -157,10 +157,10 @@ export default function NetworkManager() {
             </div>
           </div>
           <div className="glass-panel" style={{ padding: '16px', flex: 1, textAlign: 'center' }}>
-            <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Min / Max</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Min / Max</div>
             <div
               style={{
-                fontSize: '18px',
+                fontSize: '1.125rem',
                 fontWeight: '500',
                 color: 'var(--text-main)',
                 marginTop: '4px'
@@ -188,7 +188,7 @@ export default function NetworkManager() {
         >
           <span style={{ fontWeight: 500 }}>Terminal Output</span>
           {loading && (
-            <span style={{ fontSize: '12px', color: 'var(--theme-accent)' }}>Running...</span>
+            <span style={{ fontSize: '0.75rem', color: 'var(--theme-accent)' }}>Running...</span>
           )}
         </div>
         <pre
@@ -200,7 +200,7 @@ export default function NetworkManager() {
             background: 'rgba(0,0,0,0.6)',
             color: '#aaddff',
             fontFamily: 'monospace',
-            fontSize: '13px',
+            fontSize: '0.8125rem',
             overflowY: 'auto',
             whiteSpace: 'pre-wrap',
             wordBreak: 'break-all'
