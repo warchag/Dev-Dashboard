@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="build/sceen.png" alt="Dev Dashboard Logo" width="120" height="120">
+  <img src="build/sceen.png" alt="Dev Dashboard Logo" width="600" height="600">
   
   # 💻 Dev Dashboard
   
