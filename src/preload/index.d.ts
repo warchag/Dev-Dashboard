@@ -6,7 +6,8 @@ declare global {
     api: {
       system: {
         getStats: () => Promise<any>,
-        getProcesses: () => Promise<any>
+        getProcesses: () => Promise<any>,
+        getTopProcesses: () => Promise<any[]>
       },
       docker: {
         getContainers: () => Promise<any>,

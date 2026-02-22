@@ -65,11 +65,34 @@ app.whenReady().then(() => {
       const disk = await si.fsSize()
       const networkStats = await si.networkStats()
       const networkInterfaces = await si.networkInterfaces()
+      const time = si.time()
+      const cpuTemperature = await si.cpuTemperature()
       
-      return { cpu, mem, osInfo, disk, networkStats, networkInterfaces }
+      return { cpu, mem, osInfo, disk, networkStats, networkInterfaces, time, cpuTemperature }
     } catch (e) {
       console.error(e)
       return null
+    }
+  })
+
+  ipcMain.handle('system:getTopProcesses', async () => {
+    try {
+      // Get all processes
+      const procs = await si.processes()
+      // Sort by CPU usage descending and take top 5
+      const top5 = procs.list
+        .sort((a, b) => b.cpu - a.cpu)
+        .slice(0, 5)
+        .map(p => ({
+          pid: p.pid,
+          name: p.name,
+          cpu: p.cpu,
+          mem: p.mem
+        }))
+      return top5
+    } catch (e) {
+      console.error(e)
+      return []
     }
   })
 

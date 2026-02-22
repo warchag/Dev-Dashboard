@@ -5,7 +5,8 @@ import { electronAPI } from '@electron-toolkit/preload'
 const api = {
   system: {
     getStats: () => ipcRenderer.invoke('system:getStats'),
-    getProcesses: () => ipcRenderer.invoke('system:getProcesses')
+    getProcesses: () => ipcRenderer.invoke('system:getProcesses'),
+    getTopProcesses: () => ipcRenderer.invoke('system:getTopProcesses')
   },
   docker: {
     getContainers: () => ipcRenderer.invoke('docker:getContainers'),
