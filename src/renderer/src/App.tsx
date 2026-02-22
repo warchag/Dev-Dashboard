@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { LayoutDashboard } from 'lucide-react'
 import './assets/main.css'
 import SystemStats from './components/SystemStats'
 import ProcessManager from './components/ProcessManager'
@@ -7,18 +8,22 @@ import LogViewer from './components/LogViewer'
 import Settings from './components/Settings'
 import MiniTools from './components/MiniTools'
 import NetworkManager from './components/NetworkManager'
+import ApiTester from './components/ApiTester'
 import UtilityTools from './components/UtilityTools'
 
-function App() {
+function App(): React.JSX.Element {
   const [activeTab, setActiveTab] = useState('overview')
 
   return (
     <div className="app-container">
       {/* Sidebar */}
       <aside className="sidebar glass-panel">
-        <div className="brand">
-          <h1>Dev Dashboard</h1>
-          <p>Command Center</p>
+        <div className="brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <LayoutDashboard size={28} className="text-accent" />
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <h1 style={{ fontSize: '1.2rem', marginBottom: 0 }}>Dev Dashboard</h1>
+            <p style={{ fontSize: '0.8rem', margin: 0 }}>Command Center</p>
+          </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -64,6 +69,12 @@ function App() {
           >
             🌐 Network
           </a>
+          <a
+            className={activeTab === 'api' ? 'nav-item active' : 'nav-item'}
+            onClick={() => setActiveTab('api')}
+          >
+            🔌 API
+          </a>
           <div style={{ flex: 1 }} />
           <a
             className={activeTab === 'settings' ? 'nav-item active' : 'nav-item'}
@@ -80,7 +91,7 @@ function App() {
             paddingTop: '16px',
             borderTop: '1px solid var(--glass-border)',
             textAlign: 'center',
-            fontSize: '0.75rem',
+            fontSize: '0.95rem',
             color: 'var(--text-muted)'
           }}
         >
@@ -89,7 +100,7 @@ function App() {
             href="https://www.facebook.com/learntodeveloper"
             target="_blank"
             rel="noreferrer"
-            style={{ color: 'var(--theme-accent)', textDecoration: 'none', fontWeight: '500' }}
+            style={{ color: 'var(--theme-accent)', textDecoration: 'none', fontWeight: 'bold' }}
           >
             เขียนโค้ดยามว่าง
           </a>
@@ -156,6 +167,14 @@ function App() {
             style={{ display: 'flex', height: '100%', flexDirection: 'column', gap: '24px' }}
           >
             <NetworkManager />
+          </div>
+        )}
+        {activeTab === 'api' && (
+          <div
+            className="animate-fade-in"
+            style={{ display: 'flex', height: '100%', flexDirection: 'column', gap: '24px' }}
+          >
+            <ApiTester />
           </div>
         )}
         {activeTab === 'settings' && (

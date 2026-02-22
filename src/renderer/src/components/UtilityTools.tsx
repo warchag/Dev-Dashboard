@@ -3,7 +3,7 @@ import md5 from 'md5'
 
 type UtilityTab = 'uuid' | 'dummy' | 'cron' | 'hash'
 
-export default function UtilityTools(): JSX.Element {
+export default function UtilityTools(): React.JSX.Element {
   const [activeTab, setActiveTab] = useState<UtilityTab>('uuid')
 
   return (
@@ -68,7 +68,7 @@ export default function UtilityTools(): JSX.Element {
 }
 
 // --- 1. UUID & Password Generator ---
-function UuidPasswordGen(): JSX.Element {
+function UuidPasswordGen(): React.JSX.Element {
   const [uuidList, setUuidList] = useState<string[]>([])
   const [password, setPassword] = useState('')
   const [pwdLength, setPwdLength] = useState(16)
@@ -200,7 +200,7 @@ function UuidPasswordGen(): JSX.Element {
 }
 
 // --- 2. Dummy Data Generator ---
-function DummyDataGen(): JSX.Element {
+function DummyDataGen(): React.JSX.Element {
   const [dataType, setDataType] = useState('user')
   const [count, setCount] = useState(5)
   const [output, setOutput] = useState('')
@@ -323,7 +323,7 @@ function DummyDataGen(): JSX.Element {
 }
 
 // --- 3. Cron Job Expression Builder ---
-function CronBuilder(): JSX.Element {
+function CronBuilder(): React.JSX.Element {
   const [minute, setMinute] = useState('*')
   const [hour, setHour] = useState('*')
   const [dayOfMonth, setDayOfMonth] = useState('*')
@@ -425,7 +425,7 @@ function CronField({
   value: string
   onChange: (v: string) => void
   options: string[]
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
       <label style={{ fontWeight: '500' }}>{label}</label>
@@ -458,7 +458,7 @@ function CronField({
 }
 
 // --- 4. File Hash Calculator ---
-function FileHashCalc(): JSX.Element {
+function FileHashCalc(): React.JSX.Element {
   const [fileDetails, setFileDetails] = useState<{ name: string; size: number } | null>(null)
   const [hashes, setHashes] = useState<{ md5?: string; sha1?: string; sha256?: string }>({})
   const [calculating, setCalculating] = useState(false)
@@ -547,7 +547,7 @@ function HashResult({
   label: string
   value?: string
   loading: boolean
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <div>
       <div style={{ fontWeight: '500', marginBottom: '4px' }}>{label}</div>

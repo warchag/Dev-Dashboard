@@ -9,6 +9,7 @@
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
+  --panel-bg: rgba(13, 15, 23, 0.6);
   --accent-blue: #3b82f6;
   --accent-green: #10b981;
   --accent-red: #ef4444;
@@ -19,6 +20,16 @@
   --sidebar-width: 260px;
   --font-scale: 1;
   font-size: calc(16px * var(--font-scale, 1));
+}
+
+:root[data-color-scheme='light'] {
+  --bg-color: #f3f4f6;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.05);
+  --text-main: #1f2937;
+  --text-muted: #4b5563;
+  --panel-bg: rgba(255, 255, 255, 0.8);
 }
 
 :root[data-theme='purple'] {
@@ -89,13 +100,13 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   border: none;
-  color: white;
+  color: var(--text-main);
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
 }
 
 .btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--glass-border);
   transform: translateY(-1px);
 }
 
@@ -168,7 +179,7 @@ p {
   flex-direction: column;
   gap: 16px;
   border-right: 1px solid var(--glass-border);
-  background: rgba(13, 15, 23, 0.6);
+  background: var(--panel-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 10;
@@ -190,7 +201,8 @@ p {
 
 .brand h1 {
   font-size: 1.5rem;
-  background: linear-gradient(135deg, #fff 0%, #9ca3af 100%);
+  background: linear-gradient(135deg, var(--text-main) 0%, var(--text-muted) 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
@@ -209,7 +221,7 @@ p {
 }
 
 .nav-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass-border);
   color: var(--text-main);
 }
 

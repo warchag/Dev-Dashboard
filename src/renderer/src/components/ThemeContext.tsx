@@ -3,14 +3,17 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 export type ThemeColor = 'blue' | 'purple' | 'neon-green' | 'orange' | 'pink'
 export type FontFamily = 'Inter' | 'Roboto' | 'Fira Code'
 export type FontSize = 'small' | 'medium' | 'large'
+export type ColorScheme = 'dark' | 'light'
 
 interface ThemeContextType {
   themeColor: ThemeColor
   fontFamily: FontFamily
   fontSize: FontSize
+  colorScheme: ColorScheme
   setThemeColor: (color: ThemeColor) => void
   setFontFamily: (font: FontFamily) => void
   setFontSize: (size: FontSize) => void
+  setColorScheme: (scheme: ColorScheme) => void
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
@@ -28,10 +31,19 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return (localStorage.getItem('font-size') as FontSize) || 'medium'
   })
 
+  const [colorScheme, setColorScheme] = useState<ColorScheme>(() => {
+    return (localStorage.getItem('color-scheme') as ColorScheme) || 'dark'
+  })
+
   useEffect(() => {
     localStorage.setItem('theme-color', themeColor)
     document.documentElement.setAttribute('data-theme', themeColor)
   }, [themeColor])
+
+  useEffect(() => {
+    localStorage.setItem('color-scheme', colorScheme)
+    document.documentElement.setAttribute('data-color-scheme', colorScheme)
+  }, [colorScheme])
 
   useEffect(() => {
     localStorage.setItem('font-family', fontFamily)
@@ -51,7 +63,18 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [fontSize])
 
   return (
-    <ThemeContext.Provider value={{ themeColor, fontFamily, fontSize, setThemeColor, setFontFamily, setFontSize }}>
+    <ThemeContext.Provider
+      value={{
+        themeColor,
+        fontFamily,
+        fontSize,
+        colorScheme,
+        setThemeColor,
+        setFontFamily,
+        setFontSize,
+        setColorScheme
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   )

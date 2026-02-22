@@ -1,7 +1,17 @@
-import { useTheme, ThemeColor, FontFamily, FontSize } from './ThemeContext'
+import { useTheme, ThemeColor, FontFamily, FontSize, ColorScheme } from './ThemeContext'
+import React from 'react'
 
-export default function Settings() {
-  const { themeColor, setThemeColor, fontFamily, setFontFamily, fontSize, setFontSize } = useTheme()
+export default function Settings(): React.JSX.Element {
+  const {
+    themeColor,
+    setThemeColor,
+    fontFamily,
+    setFontFamily,
+    fontSize,
+    setFontSize,
+    colorScheme,
+    setColorScheme
+  } = useTheme()
 
   const colors: { id: ThemeColor; label: string; color: string }[] = [
     { id: 'blue', label: 'Default Blue', color: '#3b82f6' },
@@ -35,6 +45,32 @@ export default function Settings() {
         >
           Appearance Settings
         </h2>
+        <div style={{ marginBottom: '32px' }}>
+          <h3 style={{ marginBottom: '16px', color: 'var(--text-muted)' }}>Color Scheme</h3>
+          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            {(['dark', 'light'] as ColorScheme[]).map((scheme) => (
+              <div
+                key={scheme}
+                className="glass-panel"
+                style={{
+                  padding: '16px 24px',
+                  cursor: 'pointer',
+                  border:
+                    colorScheme === scheme
+                      ? '2px solid var(--theme-accent)'
+                      : '1px solid var(--glass-border)',
+                  color: colorScheme === scheme ? 'var(--theme-accent)' : 'var(--text-muted)',
+                  fontWeight: colorScheme === scheme ? '600' : '400',
+                  transition: 'all 0.2s ease',
+                  textTransform: 'capitalize'
+                }}
+                onClick={() => setColorScheme(scheme)}
+              >
+                <span style={{ fontSize: '1rem' }}>{scheme} Mode</span>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div style={{ marginBottom: '32px' }}>
           <h3 style={{ marginBottom: '16px', color: 'var(--text-muted)' }}>Accent Color</h3>
@@ -133,7 +169,11 @@ export default function Settings() {
                 }}
                 onClick={() => setFontSize(size)}
               >
-                <span style={{ fontSize: size === 'small' ? '0.85rem' : size === 'large' ? '1.15rem' : '1rem' }}>
+                <span
+                  style={{
+                    fontSize: size === 'small' ? '0.85rem' : size === 'large' ? '1.15rem' : '1rem'
+                  }}
+                >
                   {size} Text
                 </span>
               </div>
