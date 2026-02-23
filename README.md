@@ -53,7 +53,7 @@ Dev Dashboard ถูกสร้างขึ้นเพื่อให้นั
 
 1. **โคลนโปรเจกต์ (Clone the repository)**
    ```bash
-   git clone <your-repository-url>
+   git clone <[your-repository-url](https://github.com/warchag/Dev-Dashboard)>
    cd "Dev Dashboard"
    ```
 
